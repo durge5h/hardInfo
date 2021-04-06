@@ -86,7 +86,7 @@ function menuHere()
 {
        echo -e "\n${bold}\t CHOOSE AN OPTION BELOW !\n${reset}
 
-   	 ${green}1 - Deskop processor
+   	 ${green}1 - System processor
       ${yellow}   2 - Check System Kernal
         ${orange} 3 - Verify installed softwares
       ${gray}   4 - Operation system version
