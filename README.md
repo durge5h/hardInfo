@@ -12,7 +12,7 @@ it's easy to use and has neat user interface
 
 #Installation
 
-sudo git clone ...
+sudo git clone https://github.com/Durge5h/hardInfo-.git
 
 cd hardInfo
 
