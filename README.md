@@ -1,4 +1,4 @@
-#hardInfo 1.1
+#hardInfo 1.0
 
 hardInfo is a an free automated tool  written by a newbie :) 
 
