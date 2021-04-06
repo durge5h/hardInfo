@@ -1,0 +1,304 @@
+#! /bin/bash
+
+clear
+
+: ' function isinstalled() {
+
+        MISC="figlet boxes lolcat"
+        #WEB="apache2 mongodb"
+
+	for pkg in $MISC ; do
+	    if [ "dpkg-query -W $pkg | awk {'print $1'} = """ ]; then
+       		 sudo apt-get install $pkg
+  		 fi
+
+ done }
+
+
+isinstalled
+clear
+sudo apt-get install figlet lolcat boxes
+figlet -c -k -f digital 'HardInfo!' | boxes -d cat -a hc -p h8 | lolcat '
+
+
+function load_spin(){
+
+#spinner=( 0oooooo o0ooooo oo0oooo ooo0ooo oooo0oo ooooo0o oooooo0 )		
+spinner=( '|' '/' '-' '\')
+
+copy(){
+
+	echo "`tput setaf 3` Copying File ${reset}"
+
+	spin &
+	pid=$!
+	for i in `seq 1 3`
+	do
+		sleep 1
+	done
+
+	kill $pid
+	echo ""
+}
+
+spin(){
+
+while [ 1 ]
+ do
+ 		for i in "${spinner[@]}"
+	do	
+		echo -ne "\r$i" 
+		# echo -ne "."
+		sleep 0.2
+	done
+ done
+}
+
+copy
+
+
+}
+
+
+orange=$(tput setaf 9)
+reset=$(tput sgr0)
+bold=$(tput bold)
+black=$(tput setaf 0)
+yellow=$(tput setaf 3)
+red=$(tput setaf 1)
+green=$(tput setaf 2)
+gray=$(tput setaf 12)
+white=$(tput setaf 7)
+blue=$(tput setaf 4)
+magenta=$(tput setaf 5)
+cyan=$(tput setaf 6)
+
+
+echo -e "\n"
+figlet -c -k -f digital 'HardInfo!' | boxes -d dog -p h10 | lolcat 
+echo -e "					                         ${gray}By ${white}- ${bold}${gray}Durge5h${reset} 
+	                     		                         ${gray}Version ${white}- ${bold}${cyan}1.${orange}0 \n${reset}	
+"
+																																
+echo " " 
+TIME=1
+function menuHere()
+{
+       echo -e "\n${bold}\t CHOOSE AN OPTION BELOW !\n${reset}
+
+   	 ${green}1 - Deskop processor
+      ${yellow}   2 - Check System Kernal
+        ${orange} 3 - Verify installed softwares
+      ${gray}   4 - Operation system version
+      ${blue}   5 - Verify serial number
+     ${magenta}    6 - System memory
+      ${cyan}   7 - System IP 
+     ${red}    0 - Exit 
+		${reset}"
+	
+		echo " " 
+	echo -n "${bold}${gray} Choose Option : "${reset}  
+	read info 
+
+case $info in
+	1)
+		function proce() {
+			here=`cat /proc/cpuinfo | grep -i "^model name" | cut -d ":" -f2 | sed -n '1p' `
+			echo -e "\n ${green}CPU model : $here ${reset} \n"
+			sleep $TIME 
+
+		}
+		proce 
+		read -p "${red}<Enter> for main menu${reset}" 
+		clear
+		menuHere
+		;;
+	2) 	
+		function kernal(){
+		       #RED HAT: cat /etc/redhat-release
+	       		ubuntu=`uname -r`	       
+		      	centos=`uname -r`
+		
+		if [ -f /etc/lsb-release ]
+		then 
+			echo " " 
+			echo "${blue}kernal version : $ubuntu" 
+		else
+			echo "${magenta}kernal version : $centos"
+		fi	
+
+		}
+		kernal
+		echo " "
+		read -p "${red}<Enter> for main menu${reset}"
+		clear
+		menuHere
+		;;
+
+	 3)
+                function soft(){
+			TIME=3
+                 	echo " "
+			echo -e "${green}${bold} \t Choose an option below for programs list!${reset}
+				
+	${magenta}		1 - list Ubuntu programs
+	${gray}		2 - list Fedora programs
+	${blue}		4 - Back to menu
+			"
+		 	echo " " 
+			echo -n "${bold}Choose option : ${reset}"
+			read alternative 
+			case $alternative in 
+				1) 
+					echo -e "\n ${cyan}Listing all programs Ubuntu's system.... \n${reset}"
+					load_spin 
+					
+					here=`dpkg --get-selections | grep -v deinstalled > /tmp/programs.txt `
+					echo Programs listed and available at /tmp with the name of \'programs.txt\'
+					sleep $TIME
+					echo " " 
+					read -p "${red}Press <Enter> Back to Submenu!${reset}"
+				    clear	
+					soft
+					;;
+			 	2) 
+					 echo -e "\n${green}Listing all programs Fedora's systems...\n${reset}"
+                                        load_spin
+
+										cat /etc/os-release | cut -d "=" -f2 | sed -n '1p' > /tmp/osrelease.txt
+										linux_distro=`cat /tmp/osrelease.txt` 
+										
+										if [ "$linux_distro" == "CentOS Linux" ] ; then 
+										yum list installed > /tmp/programs.txt
+                                        echo ${orange}Programs listed and available at /tmp with the name of \'programs.txt\'${reset}
+
+										elif [ "$linux_distro" == "Ubuntu" ]
+										then
+												echo -e "\n${green} You are in Ubuntu distro you should select 1st option .\n${reset}"
+										fi
+                                        read -p "${red}hit <Enter> to submenut${reset}"
+										soft
+                                        ;;
+				3)
+					echo ''
+					read -p "${red}hit <Enter> to main menu ${reset}"
+					clear
+					menuHere
+					;;
+					esac
+		}
+                soft
+                menuHere
+		;;
+
+	 4)
+                function version(){
+                         here=`cat /etc/os-release | grep -i ^PRETTY`
+                        if [ -f /etc/os-release ]
+                        then
+                                echo -e "\n${magenta}The system version: $here${reset}\n"
+                        else
+                                echo "${red}System not supported ${reset}"
+                        fi
+		 	sleep $TIME	
+                }
+                version
+		
+		read -n 1 -p "${red}hit <Enter> for back to menu${reset}"
+		clear		
+	  	menuHere
+		;;
+	 5)
+                function sernum(){
+                           SERIAL_NUMBER=`dmidecode -t 1 | grep -i serial`
+                        echo -e "\n${orange}$SERIAL_NUMBER \n"
+                }
+         	
+				sernum
+                read -n 1 -p "${red}<Enter> for main menu ${reset}"
+				clear
+			 	menuHere
+		;;
+
+	 6)
+                function memory(){
+                         MEMORY_FREE=`free -mh  | grep ^Mem | tr -s ' ' | cut -d ' ' -f 4`
+                         MEMORY_TOTAL=`free -mh | grep Mem | tr -s ' '| cut -d ' ' -f 2`
+                         MEMORY_USED=`free -mh | grep Mem | tr -s ' ' | cut -d  ' ' -f 3`
+
+			echo " " 
+			echo "${bold}Choose option below :${reset}
+
+	${green}			1 : Total Memory 
+	${orange}			2 : Used Memory
+	${gray}			3 : Free Memory 
+	${cyan}			4 : Full info
+	${yelllow}			5 : Back to Menu 
+			"
+			
+		   	read -p "${bold}Choose option :${reset} " memo
+			 case $memo in
+				 1) 
+					echo -e "\n${magenta} Total Memory : $MEMORY_TOTAL \n" 
+					read -n 1 -p "${red}back to menu ! "
+				        memory	
+					;;
+			 	 2) 
+                       	echo -e "\n${cyan}Used Memory : $MEMORY_USED\n"
+		   		       	read -n 1 -p "${red}back to menu !"
+					memory	
+                			;;	
+				 3) 
+					 echo -e "\n ${green}Free Memory : $MEMORY_FREE \n"
+					 read -n 1 -p "${red}back to menu !"
+					 memory  
+					;;
+
+				 4) 
+					 echo -e "\n ${green}Full Memory info....\n"
+					 sleep=1
+					 free -mh
+					 echo 
+					 read -n 1 -p "${red}back to menu !${reset}" 
+					 memory
+				       	;; 
+				5)
+				 	clear
+					menuHere 
+					;;	
+				        
+				esac
+
+		}
+                memory
+                menuHere
+		;;
+
+	  7)
+                function ip(){
+                        here=`hostname -I`
+			echo " " 
+                      echo "System IP :${red} $here ${reset}" 	      
+                }
+                ip
+		echo " " 
+		read -n 1 -p "${red}<Enter> for menu ${reset}"
+		clear		
+		menuHere
+		;;
+	 0) 
+		 echo -e "\n${gray}exiting program....${reset}" 
+		 sleep 1 
+		 ;;
+
+	  *)
+	  
+  	echo -e "\n${red}Invalid option, try again " ${reset}
+       	;;
+esac
+
+}
+
+menuHere
+
+
