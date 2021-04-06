@@ -2,7 +2,7 @@
 
 hardInfo is a an free automated tool  written by a newbie :) 
 
-to explore yor system's hardware information
+to explore your system's hardware information
 
 it's easy to use and has neat user interface
 
