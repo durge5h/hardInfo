@@ -2,7 +2,7 @@
 
 ## Image
 
-![hardInof](./.png)
+![hardInof](./hardInfo.png)
 
 ## About Script
 
