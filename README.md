@@ -1,4 +1,4 @@
-#hardInfo 1.0
+# hardInfo 1.0
 
 hardInfo is a an free automated tool  written by a newbie :) 
 
@@ -10,7 +10,7 @@ it's easy to use and has neat user interface
 
 .........................................
 
-#Installation
+# Installation
 
 sudo git clone https://github.com/Durge5h/hardInfo-.git
 
@@ -20,6 +20,6 @@ sudo chmod +x setup.sh
 
 sudo bash setup.sh  
 
-#Logs
+# Logs
 
 To see the listed program you can visit the /tmp/programs.txt
