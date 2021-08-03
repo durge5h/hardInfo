@@ -1,6 +1,6 @@
 # hardInfo 1.0
 
-## Image
+## Screenshot
 
 ![hardInof](./hardInfo.png)
 
