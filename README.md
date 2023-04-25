@@ -2,7 +2,7 @@
 
 ## Screenshot
 
-![hardInof]("./hardInfo.png")
+![hardInof](./hardInfo.png)
 
 ## About Script
 
